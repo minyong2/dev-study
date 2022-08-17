@@ -14,7 +14,7 @@ public class MainController(){
 
 이렇게 하면 console창에
 [~~~~~.MainController] Hello world!
-라고 찍히게 된다.
+라고 찍히게 된다, 출력메세지 앞에 경로가 나옴
 거의 에러메세지들을 많이 찍는듯.
 ```
 
