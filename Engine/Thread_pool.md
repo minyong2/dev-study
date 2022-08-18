@@ -31,6 +31,15 @@
     스레드 풀에 너무 많은 양의 스레드를 만들어둔다면 메모리 낭비가 심해질 수 있다는 점
     그 때문에 얼만큼의 스레드가 필요할지 예측하고 할당해서 사용하는 것이 스레드 풀을 현명하게 사용하는 것이라고 할 수 있음.
 
+
+### 컨텍스트 스위칭
+    컨텍스트란?
+    => CPU가 해당 프로세스를 실행하기 위한 해당 프로세스의 정보들.
+
+### 커널 오브젝트
+
+
+
 ### java에서 thread pool 사용하기
 ```java
 executorService = Executors.newWorkStealingPool(5);
@@ -54,7 +63,7 @@ executorService = Executors.newWorkStealingPool(5);
 executorService = Executors.newWorkStealingPool(5);
 // thread pool 5개 생성
 executorService.invokeAll(perfFileCallables)
-//함수
+//
 .map(future -> {
                                 try {
                                     return future.get();
@@ -98,11 +107,17 @@ Futre 내부적으로 Thread-safe 하도록 구현되었기 때문에 `synchroni
 
 Future 객체는 작업이 완료될 때까지 기다렸다가 최종 결과를 얻는 데 사용하며, 때문에 지연 완료(pending completion) 객체라고도 한다.
 ```
-### Synchronized block
+### Synchronized (동기화)
 ```
 두 개 이상의 멀티쓰레드 환경에서 하나의 변수에 동시 접근을 할 때 경쟁상태(Race Condition)이 발생하지 않도록 한다.
 만약 경쟁상태가 발생할 수 있는 코드 블럭을 synchronized 키워드로 감싸면, 하나의 쓰레드만 이 코드 블럭에 진입할 수 있다.
 그 외에 다른 쓰레드는 먼저 진입한 쓰레드가 이 코드 블럭을 나갈 때 까지 기다리도록 하여 경쟁상태가 발생하지 않도록 합니다.
+
+즉, 공유자원의 손상을 막기 위해 상호배제를 해야한다.
+ 어떤 스레드가 임계 영역을 실행하고 있는 도중 다른 스레드가 동일한 임계 영역을 실행하게 해서는 안된다.
+
+상호배제는 공유 자원에 접근하는 임계 영역을 lock 하고 다 사용한 다음 다른 스레드가 접근할 수 있도록 unlock하는 것.
+java에서 lock, unlock을 Synchronized 키워드를 사용해서 처리할 수 있다.
 ```
 
 ### invokeAll()
@@ -113,7 +128,15 @@ invokeAny() : 여러 작업 중에 하나라도 먼저 응답이 오면 끝내�
 ```
 
 
+### Thread 간 메모리 공유
+    스레드는 전역변수, heap 등의 프로세스 자원은 하나씩만 두고 서로 공유한다.
+    그래서 공유자원에 대해 여러 스레드가 동시에 접근하는 것을 조심해야 한다.
+    멀티스레딩 환경에서 나타낼 수 있는 문제로는 경쟁상태(race condition)가 있다.
+    경쟁상태는 스레드의 실행 순서에 따라 결과가 달라지게 한다.
+
+
 ---
 ---
 ---
 참고 코드 - dr.lauren infineraPerfHdlService.java
+
