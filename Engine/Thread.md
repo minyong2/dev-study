@@ -32,8 +32,13 @@
 - Terminated : 스레드가 종료한 상태
     
 
+
+
+
+
 to be continue ...
 (thread pool에 이어집니다)
+
 
 ---
 ---
