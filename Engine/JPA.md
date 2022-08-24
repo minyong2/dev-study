@@ -162,6 +162,22 @@ findBy로시작|쿼리를 요청하는 메소드임을 알림
 countBy로시작|쿼리 결과 레코드 수를 요청하는 메소드임을 알림
 
 ---
+
+```java
+ @Override
+    public boolean isNew() {
+        return false;
+    }
+
+    true로 할 시 무조건 새로 생성! (삭제실행안됨)
+    새로 생성하는거라 테이블에 없는 데이터라고 생각함.
+    키가 null이면 true.
+```
+
+```
+복합키로 entity 생성했을 시 이름 findBy키이름_컬럼이름 으로 해줘야함
+ex) List<AlarmMstEntity> findByAlarmMstKey_Alarmno(String alarmno);
+```
 ### 참고링크
 - [JPA사용법[JpaRepository]](https://jobc.tistory.com/120)
 
