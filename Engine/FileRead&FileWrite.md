@@ -110,4 +110,84 @@ private void fileUploadWithThumbnail(String attach_file_seq, String file_path, S
 
 ## 참고링크
 - [PostgredSQL 파일전송 링크](https://jacegem.github.io/blog/2018/Spring-PostgreSQL%EC%97%90-%ED%8C%8C%EC%9D%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0/)
+
+- [Create/Write 쉬운 예제](https://homzzang.com/b/java-51)
+
+- [File 제어 클래스&메소드](https://homzzang.com/b/java-50)
+
+- [쿼리로 VO 생성](https://devel-lee.tistory.com/46)
 ---
+
+
+### File 클래스
+    java.io 패키지 안 File 클래스 가져오면 파일 제어 가능
+    import java.io.File; // File 클래스 가져오기
+    File myObj = new File("filename.txt"); //파일명지정
+
+### File 클래스 소속 메소드
+```
+canRead()
+=> Boolean 반환 / 파일 읽기 가능 여부 체크
+canWrite()
+=> Boolean 반환 / 파일이 쓰기 가능 여부 체크
+createNewFile()
+=> Boolean 반환 / 빈 파일 생성
+delete()
+=> Boolean 반환 / 파일 삭제
+exist()
+=> Boolean 반환 / 파일 존재 여부 체크
+getName()
+=> String 반환 / 파일명 변환
+getAbsolutePath()
+=> String 반환 / 파일의 절대 경로 반환
+length()
+=> Long 반환 / 바이트 단위로 파일 크기 반환
+list()
+=> String[] 반환 / 디렉토리 안 파일을 배열로 반환
+mkdir()
+=> Boolean 반환 / 디렉토리 생성
+```
+
+### Java API의 파일 제어 클래스 종류
+
+ ```
+FileReader
+BufferedReader
+Files
+Scanner
+FileInputStream
+FileWriter
+BufferedWriter
+FileOutputStream
+etc..
+```
+
+
+#### flush()에 대하여...
+```
+Campbell Ritchie 
+Sheriff  
+
+
+It probably varies from class to class. Here is an example of flush(). What happens is that a buffer might be full, with unread data still in it Flushing that moves all the data out into its destination, emptying the stream or whatever. 
+
+You don't usually have to call flush() if you call close().
+
+
+Stephan van Hulst 
+Bartender  
+
+Here's one concrete example. 
+Let's say you have a BufferedOutputStream wrapped around a Socket's OutputStream. You want to send a load of data, but you don't want to close the connection yet. 
+After you're done writing everything you want to send, some data may still be in the buffer. Now you will have to flush the buffer, to force it to send all the data.
+
+===============================================================================================
+
+라는데 flush를 호출하면 `강제적`으로 파일에 입력하는 느낌 ...
+
+flush()와 close()를 같이 쓴다고 하는데
+사실 close함수가 내부적으로 flush함수를 호출한다고 함.
+
+
+===> 사용자가 원할 때 버퍼를 비워주는 것으로 버퍼를 비우는 것은 IO에서는 출력하는 것 이겠고, 네트워크에서는 버퍼의 내용을 클라이언트나 서버로 보내는 것이겠지. 여기서 사용자가 원할 때라는 말이 포인트인 것 같다.
+```
