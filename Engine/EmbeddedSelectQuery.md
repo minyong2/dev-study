@@ -36,3 +36,18 @@
   WHERE CONSTRAINT_TYPE is NULL
   로 고쳐주면 복합키 외에 키를 조회해줌
  ```
+
+ code.append("package "+map.get("package")+";\n");
+            code.append("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\n");
+            code.append("import com.ktds.nms.entity.entity.alarm.key.AlarmEntityKey;\n");
+            code.append("import lombok.*;\n");
+            code.append("import org.springframework.data.domain.Persistable;\n");
+            code.append("import java.io.Serializable;\n");
+            code.append("import java.sql.Timestamp;\n");
+            code.append("import javax.persistence.*;\n\n");
+            
+            code.append("@Entity\n");
+            code.append("@Getter\n");
+            code.append("@Setter\n\n");
+            code.append("@JsonIgnoreProperties(ignoreUnknown = true)");
+            code.append("@NoArgsConstructor(access = AccessLevel.PUBLIC)\n");
