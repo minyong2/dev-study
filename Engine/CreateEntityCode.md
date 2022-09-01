@@ -156,7 +156,7 @@ public class ComNativeQueryRepository {
     }
 }
 ```
-- 테이블 조회해서 복합키랑 Entity 생성하는 쿼리
+- 테이블 조회해서 복합키랑 Entity 생성하는 쿼리 
 
 ---
 ```java
@@ -405,5 +405,7 @@ public class UtilCodeApplication implements CommandLineRunner {
 
 ## 생성된 파일
 ![image](https://user-images.githubusercontent.com/97263974/187595304-d41bbea5-c421-467b-a65d-48193992f822.png)
----
+--- 
 ![image](https://user-images.githubusercontent.com/97263974/187595502-0ef05f14-187a-4ca5-be5f-ac3d5727392b.png)
+
+### 클래스 이름은 앞에만 소문자로 바꿔주면 됨~
