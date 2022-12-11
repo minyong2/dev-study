@@ -61,3 +61,35 @@ public void removeCluster(String tmpClusterNo){
 
 이런 에러는 index를 사용하는 for 루프를 사용해서 없어진 만큼 사이즈와 인덱스를 직접 조정 할 수 있지만 Iterator를 사용하면 더 편리하게 코딩할 수 있음
 ```
+
+```java
+<📆221212 추가>
+
+public void createSdnTrafficTicket(SdnTrafficListVo sdnTrafficListVo) {
+ Iterator<SdnTrafficVo> itr;
+
+try{
+            if(sdnTrafficListVo != null && sdnTrafficListVo.getData().size() > 0) {
+                itr = sdnTrafficListVo.getData().iterator();
+
+                while (itr.hasNext()) {
+                    sdnTrafficVo = itr.next();
+        // iterator를 사용하여 list가 변경되어도 오류가 나지 않도록 함
+
+                    parameterMap = new HashMap<String, String>();
+                    parameterMap.put("strifid", sdnTrafficVo.getStrifid());
+                    parameterMap.put("measured_datetime", sdnTrafficVo.getMeasured_datetime() + "");
+
+
+                    sdnTrafficInfoVo = sdnTrafficMapper.selectSdnTrafficAlarm(parameterMap);
+
+                    if (sdnTrafficInfoVo != null) {
+                        sdnTrafficVo.setStrifid(sdnTrafficInfoVo.getStrifid());
+                        sdnTrafficVo.setStrresid(sdnTrafficInfoVo.getStrresid());
+                    }
+                ...}
+            ...}
+        ...}
+    ...}
+
+```
