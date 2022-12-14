@@ -36,6 +36,12 @@ ANM-003
 1.1 연동 대상 트래픽 원시 데이터와 연동 후 DB에 저장된 트래픽 데이터가 일치함을 확인
 2. 장비 리소스 사용량 (CPU, Memory) 수집 기능 확인
 2.1 연동 대상 원시 데이터와 연동 후 DB에 저장된 데이터가 일치함을 확인.
+
+select count(*) from ip_sdn.tb_nodefactor tn 
+where measured_datetime > '2022-12-14 15:35:54.000'
+
+select count(*) from optroute.nodefactor n 
+where MeasuredDateTime  > '2022-12-14 15:35:54.000'
 ```
 ![nodefactor](https://user-images.githubusercontent.com/97263974/207226967-d13d0a51-782a-46dd-84a0-a9e93156ceb7.png)
 ![traffic](https://user-images.githubusercontent.com/97263974/207227147-f3d27fb2-1543-4b3b-ae1c-08bb96b4bf47.png)
@@ -84,6 +90,10 @@ ANP-001
 
 2. 실시간성 데이터 수집 정상 여부 확인 (Sflow)
 2.1 실시간으로 연동된 수집서버의 로그와 DB에 저장된 데이터 건수를 확인하여 100% 데이터 수집을 하고 있는지 확인함.
+
+select measured_datetime from ip_sdn.tb_nodefactor tn
+where measured_datetime >= '2022-12-14 15:00:00.000' and measured_datetime < '2022-12-14 16:00:00.000'
+group by measured_datetime 
 ```
 
 ## 3.12.1.3 외부 제공용 덤프 데이터 정확성
